@@ -1,0 +1,150 @@
+/* Alap */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cinzel', serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0a0a0a, #000);
+  color: #e6e6e6;
+  overflow-x: hidden;
+}
+
+/* Fejléc */
+.header {
+  background: rgba(20, 20, 20, 0.85);
+  border-bottom: 2px solid crimson;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header h1 {
+  color: red;
+  font-size: 28px;
+  text-shadow: 0 0 10px darkred;
+}
+
+.header span {
+  color: white;
+}
+
+.header ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.header a {
+  text-decoration: none;
+  color: #e6e6e6;
+  font-weight: bold;
+  position: relative;
+  transition: 0.3s;
+}
+
+.header a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: crimson;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.header a:hover::after {
+  width: 100%;
+}
+
+.header a:hover {
+  color: crimson;
+}
+
+/* Hero rész */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, rgba(30, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url('foggy-bg.jpg') center/cover no-repeat;
+  color: white;
+}
+
+.hero h2 {
+  font-size: 42px;
+  color: crimson;
+  text-shadow: 0 0 15px red;
+}
+
+.hero p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+/* Érdekességek szekciók */
+.erdekesseg {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  background: rgba(15, 15, 15, 0.9);
+  border: 2px solid crimson;
+  border-radius: 20px;
+  max-width: 900px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+  transition: 0.4s;
+  animation: float 6s ease-in-out infinite;
+}
+
+.content:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+}
+
+.content img {
+  width: 300px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 2px solid darkred;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.content h2 {
+  color: darkorange;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.content p {
+  font-size: 18px;
+  color: #d1d1d1;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Animáció – lebegés */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  color: gray;
+  font-size: 14px;
+  border-top: 1px solid #111;
+}

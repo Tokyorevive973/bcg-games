@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Black Core Games – Videók</title>
+  <link rel="stylesheet" href="tovabb-videp.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">
+    <h1>Black<span>CoreGames</span></h1>
+  </div>
+  <ul>
+    <li><a href="index.html">Kezdőlap</a></li>
+    <li><a href="#">Játékok</a></li>
+    <li><a href="#">Érdekességek</a></li>
+    <li><a href="#" class="active">Videók</a></li>
+    <li><a href="#">Kapcsolat</a></li>
+  </ul>
+</header>
+
+<section class="hero">
+  <h2>Videók — Trailer, játékbemutatók és rejtett felvételek</h2>
+  <p>Figyelem: A következő tartalom erősen nyugtalanító lehet. Csak saját felelősségre!</p>
+</section>
+
+<main class="container">
+
+  <!-- Fő videó -->
+  <article class="featured">
+    <div class="meta">
+      <h3>Fő Trailer</h3>
+      <p class="sub">Démonok között — Hivatalos Trailer</p>
+    </div>
+
+    <div class="video-wrap" data-video-id="w1S1AChUTdg" id="featured-video">
+      <div class="iframe-ratio">
+        <iframe
+          src="https://www.youtube.com/embed/w1S1AChUTdg?rel=0&showinfo=0"
+          title="Démonok között – Hivatalos Trailer"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </article>
+
+  <!-- Galéria -->
+  <section class="gallery">
+    <h3>Videó Galéria</h3>
+    <div class="thumb-grid">
+
+      <button class="thumb" data-video-id="w1S1AChUTdg">
+        <img src="thumb1.jpg" alt="Démonok között trailer">
+        <span class="label">Démonok között – Trailer</span>
+      </button>
+
+      <button class="thumb" data-video-id="3ir4jjpPj0c">
+        <img src="thumb2.jpg" alt="Gyermekek a síron túlról teaser">
+        <span class="label">Gyermekek a síron túlról – Teaser</span>
+      </button>
+
+      <button class="thumb" data-video-id="VIDEO_ID_3">
+        <img src="thumb3.jpg" alt="Core Breaker gameplay">
+        <span class="label">Core Breaker – Gameplay</span>
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Modal a videólejátszáshoz -->
+<div id="video-modal" class="modal" aria-hidden="true">
+  <button id="modal-close" class="modal-close" aria-label="Bezárás">✕</button>
+  <div class="modal-content">
+    <div class="iframe-ratio" id="modal-iframe-container"></div>
+  </div>
+  <div class="grain"></div>
+</div>
+
+<footer class="footer">
+  <p>© 2025 Black Core Games – Minden jog fenntartva.</p>
+</footer>
+
+<script>
+(function(){
+  const modal = document.getElementById('video-modal');
+  const modalContainer = document.getElementById('modal-iframe-container');
+  const closeBtn = document.getElementById('modal-close');
+
+  document.querySelectorAll('.thumb, .video-wrap').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const id = el.dataset.videoId;
+      if(!id) return;
+      openModalWithVideo(id);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{
+    if(e.target === modal) closeModal();
+  });
+
+  function openModalWithVideo(videoId){
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    modalContainer.innerHTML = '';
+    modalContainer.appendChild(iframe);
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modalContainer.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>

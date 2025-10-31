@@ -1,0 +1,130 @@
+/* horror alapok */
+* { box-sizing: border-box; margin:0; padding:0; }
+:root{
+  --bg:#050505;
+  --panel: rgba(10,10,10,0.9);
+  --accent: #c62828; /* vérvörös */
+  --muted: #bfbfbf;
+  --glow: 0 0 18px rgba(198, 40, 40, 0.35);
+}
+
+body{
+  background: radial-gradient(circle at 20% 10%, #0b0b0b 0%, #000 60%);
+  color: var(--muted);
+  font-family: "Montserrat", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+/* Header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 32px;
+  background: linear-gradient(180deg, rgba(12,12,12,0.6), rgba(0,0,0,0.6));
+  border-bottom: 1px solid rgba(200,20,20,0.12);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.logo h1{
+  color:var(--accent);
+  font-size:20px;
+  letter-spacing:1px;
+  text-shadow: 0 0 10px rgba(198,40,40,0.12);
+}
+.logo span{ color:#fff; }
+
+.header ul{ list-style:none; display:flex; gap:22px; align-items:center; }
+.header a{
+  color:var(--muted); text-decoration:none; font-weight:600; position:relative; padding:6px 4px;
+}
+.header a.active, .header a:hover{
+  color:var(--accent);
+  text-shadow: 0 0 10px rgba(198,40,40,0.18);
+}
+.header a::after{
+  content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:var(--accent); transition:0.28s;
+}
+.header a:hover::after{ width:100%; }
+
+/* Hero */
+.hero{
+  padding:64px 20px; text-align:center; background: linear-gradient(180deg, rgba(80,0,0,0.02), transparent);
+}
+.hero h2{ color:var(--accent); font-size:34px; text-shadow: 0 0 20px rgba(198,40,40,0.14); margin-bottom:8px; }
+.hero p{ color:#cfcfcf; opacity:0.9; }
+
+/* Main container */
+.container{ padding:40px 18px; max-width:1200px; margin:0 auto; }
+
+/* Featured video */
+.featured{ margin-bottom:36px; display:grid; grid-template-columns: 1fr; gap:18px; }
+.featured .meta h3{ color:#fff; font-size:18px; margin-bottom:6px; }
+.featured .meta .sub{ color:#d6d6d6; opacity:0.9; }
+
+/* Responsive iframe wrapper keeping aspect ratio */
+.iframe-ratio{ position:relative; width:100%; padding-bottom:56.25%; overflow:hidden; border-radius:12px; box-shadow: var(--glow); border:1px solid rgba(200,20,20,0.06); background:linear-gradient(180deg, rgba(20,0,0,0.4), rgba(0,0,0,0.6));}
+.iframe-ratio iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+/* Video wrap clickable */
+.video-wrap{ cursor:pointer; transition: transform .25s ease, box-shadow .25s ease; }
+.video-wrap:hover{ transform: scale(1.01); box-shadow: 0 0 40px rgba(198,40,40,0.12); }
+
+/* Gallery */
+.gallery{ margin-top:10px; }
+.gallery h3{ color:var(--accent); margin-bottom:14px; text-shadow: 0 0 14px rgba(198,40,40,0.08); }
+.thumb-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; }
+.thumb{
+  background: var(--panel);
+  border:1px solid rgba(200,20,20,0.06);
+  padding:10px;
+  border-radius:10px;
+  display:flex; flex-direction:column; gap:10px; align-items:center;
+  cursor:pointer; transition: transform .22s ease, box-shadow .22s ease;
+  position:relative; overflow:hidden;
+}
+.thumb img{ width:100%; height:140px; object-fit:cover; border-radius:6px; filter: grayscale(20%) contrast(1.02); transform-origin:center; transition: transform .45s ease, filter .25s; }
+.thumb .label{ font-size:14px; color:#dcdcdc; text-align:center; padding:6px 4px; }
+
+.thumb:hover{ transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+.thumb:hover img{ transform:scale(1.06); filter: grayscale(0%); }
+
+/* small red play icon */
+.thumb::after{
+  content:'▶'; position:absolute; right:12px; top:12px; background:rgba(0,0,0,0.45); padding:6px 8px; border-radius:6px; color:var(--accent); font-weight:700; text-shadow:0 0 6px rgba(198,40,40,0.18);
+}
+
+/* Modal */
+.modal{
+  position:fixed; inset:0; display:grid; place-items:center; background: rgba(0,0,0,0.82); z-index:9999;
+  opacity:0; pointer-events:none; transition:opacity .24s ease;
+}
+.modal.open{ opacity:1; pointer-events:auto; }
+.modal .modal-content{ width:min(1100px, 95%); max-width:1100px; padding:18px; }
+.modal .modal-close{
+  position:fixed; right:26px; top:22px; z-index:10010; background:transparent; border:2px solid rgba(255,255,255,0.06); color:var(--muted); padding:8px 12px; border-radius:8px; cursor:pointer; font-size:20px;
+  transition: background .18s, color .18s;
+}
+.modal .modal-close:hover{ background:rgba(255,255,255,0.02); color:var(--accent); border-color:rgba(198,40,40,0.2); }
+
+/* Grain / VHS static effect */
+.grain{
+  pointer-events:none;
+  position:fixed; inset:0; z-index:9998; mix-blend-mode:overlay;
+  background-image: url('vhs-grain.png'); /* ha van textúrád, különösen hatásos; ha nincs, hagyhatod üresen */
+  opacity:0.14;
+  display:block;
+  transition:opacity .4s;
+}
+
+/* Footer */
+.footer{ text-align:center; padding:22px 18px; color:#9a9a9a; border-top:1px solid rgba(255,255,255,0.02); margin-top:48px; }
+
+/* small responsiveness */
+@media (max-width:720px){
+  .hero h2{ font-size:22px; }
+  .thumb img{ height:120px; }
+  .iframe-ratio{ padding-bottom:56.25%; }
+}
